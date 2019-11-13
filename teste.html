@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Exemplo de gráfico</title>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      google.load('visualization', '1.0', {'packages':['corechart']});
+      google.setOnLoadCallback(function(){
+        var jsonData = $.ajax({url: "getdata.php", dataType:"json", async: false}).responseText;
+        var json = eval("(" + jsonData + ")");
+        var dados = new google.visualization.DataTable(json.dados);
+        var chart = new google.visualization.PieChart(document.getElementById('area_grafico'));
+        chart.draw(dados,{width: 400, height: 240});
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="area_grafico"></div>
+  </body>
+</html>
